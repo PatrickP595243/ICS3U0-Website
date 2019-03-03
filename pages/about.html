@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="../CSS/
+	theme.css">
+	<title>Patrick's Site</title>
+	<link rel="icon" href="../images/tlk.png">
+
+</head>
+
+<body>
+	
+<div class="row" id="body">
+  <div class="column left" style="background-color:#ededed;">
+    <canvas id="myCanvas" width="250" height="100" style="border:1px solid #000000;">
+			</canvas>
+			<script>
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.font = "20px Arial";
+			ctx.fillText("Patrick Pineda",5,25);
+			ctx.fillText("ICS3U0 Portfolio",5,50);
+			</script>
+	<p></p>
+	<canvas id="myCanvas2" width="250" height="534" style="border:1px solid #000000;">
+			</canvas>
+			<script>
+			var c = document.getElementById("myCanvas2");
+			var ctx = c.getContext("2d");
+			ctx.font = "20px Arial";
+			ctx.fillText("Announcements",5,25);
+			ctx.font = "16px Arial";
+			ctx.fillText("Website due Friday, March 1",5,50);
+			</script>
+  </div>
+  <div class="column right" style="background-color:#ededed;">
+    <div class="navbar">
+	  	<a class="active" href="../index.html">Home</a>
+		<a href="assignments.html">Assignments</a>
+		<a href="contact.html">Contact</a>
+		<a href="about.html">About</a>
+  	</div>
+  	<h2>About Me</h2>
+  	<p><img src="../images/Me.jpg" class="me"> My name is Patrick Pineda and I am an eleventh grade student at TLK Secondary School. I am interested in computer engineering and I took Grade 11 Computer Engineering first semester. I would like to study computer engineeing at UofT or Waterloo. My dream job would be working for Google, Apple, Microsoft, or Intel as a computer hardware engineer.</p>
+  	<br><br><br><br><br><br>
+  	<h2>Previous Work</h2>
+  	<h3>Python Game</h3>
+  	<div id="dialog-window">
+  		<div id="scrollable-content">
+    		<pre>
+#Maze Game by Patrick Pineda
+
+#Import modules 
+import turtle
+import math
+import random
+import time
+
+#Initialize game screen
+wn = turtle.Screen()
+wn.bgcolor("black")
+wn.title("Escape the maze!")
+wn.setup(700,700)
+wn.tracer(0)
+
+#Scoring
+scores = [0]
+
+#Counter for level check
+counter = 0
+
+#Register images
+images = ["wall.gif", "coin.gif", "kirby.gif",
+          "TheBigBoo.gif", "checkpoint.gif", "heart.gif",
+          "key.gif", "door.gif", "kirby_right.gif", "kirby_left.gif",
+          "TheBigBoo_right.gif", "Smart.gif", "Smart_right.gif"]
+
+for image in images:
+    turtle.register_shape(image)
+
+#Pen class
+class Pen(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.shape("square")
+        self.color("white")
+        self.penup()
+        self.speed(0)
+
+#Onscreen text turtles
+mypen = turtle.Turtle()
+mypen.hideturtle()
+lives = turtle.Turtle()
+lives.hideturtle()
+death_screen = turtle.Turtle()
+death_screen.hideturtle()
+life_lost = turtle.Turtle()
+life_lost.hideturtle()
+start1 = turtle.Turtle()
+start1.hideturtle()
+highscoretext = turtle.Turtle()
+highscoretext.hideturtle()
+averagescoretext = turtle.Turtle()
+averagescoretext.hideturtle()
+
+#Player class
+class Player(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.shape("kirby.gif")
+        self.color("blue")
+        self.penup()
+        self.speed(0)
+        self.points = 0
+        self.lives = 3
+        
+#Moving the player
+        
+    def go_up(self):
+        #Calculate new position
+        move_to_x = player.xcor()
+        move_to_y = player.ycor() + 24
+        #Check barrier
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in doors:
+            self.goto(move_to_x, move_to_y)
+
+    def go_down(self):
+        #Calculate new position
+        move_to_x = player.xcor()
+        move_to_y = player.ycor() - 24
+        #Check barrier
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in doors:
+            self.goto(move_to_x, move_to_y)
+
+    def go_left(self):
+        self.shape("kirby_left.gif")
+        #Calculate new position
+        move_to_x = player.xcor() - 24
+        move_to_y = player.ycor() 
+        #Check barrier
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in doors:
+            self.goto(move_to_x, move_to_y)
+
+    def go_right(self):
+        self.shape("kirby_right.gif")
+        #Calculate new position
+        move_to_x = player.xcor() + 24
+        move_to_y = player.ycor() 
+        #Check barrier
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in doors:
+            self.goto(move_to_x, move_to_y)
+
+#Collision function
+    def is_collision(self, other):
+        a = self.xcor()-other.xcor()
+        b = self.ycor()-other.ycor()
+        distance = math.sqrt((a ** 2) + (b ** 2)  )
+
+        if distance < 5:
+            return True
+        else:
+            return False
+
+#Checkpoint class
+class Checkpoint(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.shape("checkpoint.gif")
+        self.color("white")
+        self.penup()
+        self.speed(0)
+
+    def destroy(self):
+        self.goto(2000,2000)
+        self.hideturtle()
+
+#Door class
+class Door(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.shape("door.gif")
+        self.color("white")
+        self.penup()
+        self.speed(0)
+
+    def destroy(self):
+        self.goto(2000,2000)
+        self.hideturtle()
+
+#Key class
+class Key(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.shape("key.gif")
+        self.color("white")
+        self.penup()
+        self.speed(0)
+
+    def destroy(self):
+        self.goto(2000,2000)
+        self.hideturtle()
+
+#Points class
+class Treasure(turtle.Turtle):
+    def __init__(self, x, y):
+        turtle.Turtle.__init__(self)
+        self.shape("coin.gif")
+        self.color("yellow")
+        self.penup()
+        self.speed(0)
+        self.points = 100
+        self.goto(x, y)
+
+    def destroy(self):
+        self.goto(2000, 2000)
+        self.hideturtle()
+
+#Lives class
+class Heart(turtle.Turtle):
+    def __init__(self, x, y):
+        turtle.Turtle.__init__(self)
+        self.shape("heart.gif")
+        self.color("yellow")
+        self.penup()
+        self.speed(0)
+        self.lives = 1
+        self.goto(x, y)
+
+    def destroy(self):
+        self.goto(2000, 2000)
+        self.hideturtle()
+
+#Enemy class
+class Enemy(turtle.Turtle):
+    def __init__(self, x, y):
+        turtle.Turtle.__init__(self)
+        self.shape("TheBigBoo.gif")
+        self.color("yellow")
+        self.penup()
+        self.speed(0)
+        self.points = 25
+        self.goto(x, y)
+        self.direction = random.choice(["up", "down", "left", "right"])
+
+    def move(self):
+        if self.direction == "up":
+            dx = 0
+            dy = 24
+        elif self.direction == "down":
+            dx = 0
+            dy = -24
+        elif self.direction == "left":
+            self.shape("TheBigBoo.gif")
+            dx = -24
+            dy = 0
+        elif self.direction == "right":
+            self.shape("TheBigBoo_right.gif")
+            dx = 24
+            dy = 0
+        else:
+            dx = 0
+            dy = 0
+        #Calculate coordinate to move to
+        move_to_x = self.xcor() + dx
+        move_to_y = self.ycor() + dy
+
+        #Check for wall
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in checkpoints:
+            self.goto(move_to_x, move_to_y)
+
+        else:
+            self.direction = random.choice(["up", "down", "left", "right"])
+
+        turtle.ontimer(self.move, t=random.randint(100, 300))
+
+    def destroy(self):
+        self.goto(2000,2000)
+        self.hideturtle()
+
+#Enemy class with AI  
+class Smart_Enemy(turtle.Turtle):
+    def __init__(self, x, y):
+        turtle.Turtle.__init__(self)
+        self.shape("Smart.gif")
+        self.color("yellow")
+        self.penup()
+        self.speed(0)
+        self.points = 25
+        self.goto(x, y)
+        self.direction = random.choice(["up", "down", "left", "right"])
+
+    def move(self):
+        if self.direction == "up":
+            dx = 0
+            dy = 24
+        elif self.direction == "down":
+            dx = 0
+            dy = -24
+        elif self.direction == "left":
+            self.shape("Smart.gif")
+            dx = -24
+            dy = 0
+        elif self.direction == "right":
+            self.shape("Smart_right.gif")
+            dx = 24
+            dy = 0
+        else:
+            dx = 0
+            dy = 0
+
+        #Follows player if player is close
+        if self.is_close(player):
+            if player.xcor() < self.xcor():
+                self.direction = "left"
+            elif player.xcor() > self.xcor():
+                self.direction = "right"
+            elif player.ycor() < self.ycor():
+                self.direction = "down"
+            elif player.ycor() > self.ycor():
+                self.direction = "up"
+    
+        #Calculate coordinate to move to  
+        move_to_x = self.xcor() + dx
+        move_to_y = self.ycor() + dy
+
+        if (move_to_x, move_to_y) not in walls and (move_to_x, move_to_y) not in checkpoints:
+            self.goto(move_to_x, move_to_y)
+
+        else:
+            self.direction = random.choice(["up", "down", "left", "right"])
+
+        turtle.ontimer(self.move, t=random.randint(100, 300))
+
+    #Check if player is close to emeny
+    def is_close(self, other):
+        a = self.xcor()-other.xcor()
+        b = self.ycor()-other.ycor()
+        distance = math.sqrt((a ** 2) + (b ** 2) )
+
+        if distance < 75:
+            return True
+        else:
+            return False
+
+    def destroy(self):
+        self.goto(2000,2000)
+        self.hideturtle()
+        
+#Death function
+def death():
+    #Death screen
+    death_screen.color("white")
+    death_screen.penup()
+    death_screen.hideturtle()
+    death_screen.setposition(0, 0)
+    death_screen.write("You died!", False, align="center", font=("Arial",60,"bold"))
+    time.sleep(3) 
+    death_screen.undo()
+    #Clearing gameboard
+    pen.clear()
+    walls.clear()
+    checkpoints.clear()
+    #Deleting enemies
+    for enemy in enemies:
+        enemy.destroy()
+    #Deleting treasures
+    for treasure in points:
+        treasure.destroy()
+    #Deleting key and door
+    key.destroy()
+    door.destroy()
+    #Deleting hearts
+    for heart in hearts:
+        heart.destroy()
+    #Clearing lists
+    enemies.clear()
+    points.clear()
+    checkpoints.clear()
+    hearts.clear()
+    doors.clear()
+    #Resetting lives and score
+    player.lives = 3
+    scores.append(player.points)
+    player.points = 0
+
+#Level advancement
+def advance():
+    #Clearing gameboard
+    pen.clear()
+    walls.clear()
+    #Deleting enemies
+    for enemy in enemies:
+        enemy.destroy()
+    #Deleting treasures
+    for treasure in points:
+        treasure.destroy()
+    #Deleting hearts
+    for heart in hearts:
+        heart.destroy()
+    #Clearing lists
+    enemies.clear()
+    points.clear()
+    checkpoints.clear()
+    hearts.clear()
+    doors.clear()
+    
+#Levels list
+levels = [""]
+
+#Level 1
+level_1 = [
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+"XT        XXPX          X",
+"X XX XX X XX X XXXXXXX  X",
+"X XX XX X            XX X",
+"X  X  X XXXX XXXX XX  X X",
+"XX XXXX X  X XXXX XXX X X",
+"XX XXXX X XX XXXX XX  X X",
+"XX   XX X XX   XX XX XXTX",
+"XXXX XX X XXXXXX  XX XXXX",
+"XXXX XX X X   XXXXX     X",
+"X    XT X X X  XT   XXX X",
+"X XXXXXXX X XX  XXXXXXXTX",
+"X XX        X X        XX",
+"X XX XXX XXXX XXXXX XX XX",
+"X    XTX   XX    XX XX XX",
+"XX XXX XXX XX XX XX XX XX",
+"XX XXX   X  X XX    XX XX",
+"XX   XXX XXXX XXX XXX  XX",
+"XT X XXX      XXX XX  XXX",
+"XXXX XXXXXXXX     XX XXXX",
+"XX      XX    XXX XX   XX",
+"XX XXXXXXX XXXXXX XXXX XX",
+"XX XX   TX XXXXX    TX XX",
+"XX    XXXX X     XXXXX TX",
+"XXXXXXXXXXCXXXXXXXXXXXXXX",
+]
+level_2 = [
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+"XPXXXXXXXXXX            X",
+"X XXXX       XXXX XXXXXTX",
+"X  XXX XXXX XXXXX XXXXXXX",
+"XX  XX XXXX XX    XX    X",
+"XXX    XT   X  XXXXX XX X",
+"XXXX XXXXXXXXX      EXX X",
+"XX   XX     XXXXXXXXXXX X",
+"X  XXX  X X XXXXX XXXXX X",
+"X XXXXX XXX             X",
+"XTXX    XLXXXXXXXXXXXXXXX",
+"XXXX XXXX XXXX     XX   X",
+"XTXX           XXX  XXX X",
+"X XXXXX XXXXX XXXXX     X",
+"XE      XXXXXXX XXXXX  XX",
+"XXX XXXXXXXXX      XXX XX",
+"XXX XXX      EX XX  XX XX",
+"XXX  TX XXXXXXXXXXX    XX",
+"XXXXXXX X XE       XXXXXX",
+"XX      X X XXXXXX XTXXXX",
+"X  XXXXXX X XT  XX X    X",
+"XX          XXX XX XXXX X",
+"XXXXXXXXXX XXXX XX XXXX X",
+"XT         X            X",
+"XXXXXXXXXXXXCXXXXXXXXXXXX",
+]
+level_3 = [
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+"XP           XX        TX",
+"X            XXL        X",
+"XXXXXXXXXX   XXXXXXXX   X",
+"XXXXXXXXXX   XXXXXXXX   X",
+"X       XX              X",
+"X      TXXS             X",
+"X   XXXXXXXXXXX   XXXX  X",
+"X   XXXXXXXXXXX   XXXX TX",
+"X                 XXXXXXX",
+"XS                XXLT XX",
+"XXXX   XXXXXXXXXXXXX   XX",
+"XXXX        TTTXXXXX   XX",
+"XXTX   XXXXXXXXXXXXX   XX",
+"XXTX           SXXXX   XX",
+"XXTX            XXXX   XX",
+"XX XXXXXXXXXX   XXXX   XX",
+"XX XXXXT   XX         TXX",
+"XXKT XXXX  XX          XX",
+"XX   XXXX  XX   XXXXXXXXX",
+"XX   XXXX  XX   XXXXX TXX",
+"XX   XXXX  XX   XXXXX  XX",
+"XX                     XX",
+"XXS                    DC",
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+]
+level_4 = [
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+"XCXXXXXXXX XXXXXXXXEXXXXX",
+"XDXXXX       TTTTT    LLX",
+"XPXXXX XXXEXXXXXXXX XXXXX",
+"X XXEX X XEXEXXX XXEXXXXX",
+"X XX X X XXXTXXX XXXXXXXX",
+"X                     XXX",
+"XXXX XXX XXX XXXTXXXX XXX",
+"XXXX XXXEX X X XEXXXX XXX",
+"XXXXXXXXXXEXXXEXXXX    EX",
+"XXX      T TTT  LLXXX XXX",
+"XXX XXXXXXEXXXEXXXXE    X",
+"XXX XXXXXXEXXXEXXXXXX XXX",
+"XXX XXXXXXXXXXXXXXX    EX",
+"XXX XXX        S  XXX XXX",
+"XXX                   XXX",
+"XXX XXX           XXXXXXX",
+"XXX XXXXXXXXXXXXXXXXX XXX",
+"XXX XXX      E    XXXEXXX",
+"XXX                     X",
+"XXXXXXX           XXXEX X",
+"XXXXXXXXXXXXXXXXXXXXXEX X",
+"XXXXXXXXXXXXXXXXXXXXXXX X",
+"XK                      X",
+"XXXXXXXXXXXXXXXXXXXXXXXXX",
+]
+
+#Points list
+points = []
+
+#Enemies list
+enemies = []
+
+#Appending Level 1 to Levels list
+levels.append(level_1)
+levels.append(level_2)
+levels.append(level_3)
+levels.append(level_4)
+
+#Game map setup function
+def setup_maze(level):
+    for y in range(len(level)):
+        for x in range(len(level[y])):
+            character = level[y][x]
+            screen_x = -288 + (x * 24)
+            screen_y = 288 - (y * 24)
+
+            if character == "X":
+                pen.goto(screen_x, screen_y)
+                pen.shape("wall.gif")
+                pen.stamp()
+                #Append coordinates to wall list
+                walls.append((screen_x, screen_y))
+
+            if character == "D":
+                door.goto(screen_x, screen_y)
+                #Append coordinates to doors list
+                doors.append((screen_x, screen_y))
+
+            if character == "K":
+                key.goto(screen_x, screen_y)
+
+            if character == "P":
+                player.goto(screen_x, screen_y)
+
+            if character == "T":
+                points.append(Treasure(screen_x, screen_y))
+                #Append coins to points list
+
+            if character == "E":
+                enemies.append(Enemy(screen_x, screen_y))
+
+            if character == "S":
+                enemies.append(Smart_Enemy(screen_x, screen_y))
+
+            if character == "C":
+                checkpoint.goto(screen_x, screen_y)
+                checkpoints.append((screen_x, screen_y))
+                #Append checkpoint to checkpoints list
+
+            if character == "L":
+                hearts.append(Heart(screen_x, screen_y))
+                #Append lives to hearts list
+
+#Create class instances
+pen = Pen()
+player = Player()
+checkpoint = Checkpoint()
+door = Door()
+key = Key()
+
+#Create lists
+walls = []
+checkpoints = []
+hearts = []
+doors = []
+
+#Level setup
+setup_maze(levels[1])
+
+#Keyboard Binding
+def playermovement():
+    turtle.listen()
+    turtle.onkey(player.go_left,"Left")
+    turtle.onkey(player.go_right,"Right")
+    turtle.onkey(player.go_down,"Down")
+    turtle.onkey(player.go_up,"Up")
+
+#Turn of screen updates
+wn.tracer(0)
+
+#Moving enemies
+for enemy in enemies:
+    turtle.ontimer(enemy.move, t=250)
+    
+#Level 1 startup
+wn.update()
+start1.color("white")
+start1.penup()
+start1.hideturtle()
+start1.setposition(0, 0)
+start1.write("Level 1", False, align="center", font=("Arial",60,"bold"))
+turtle.ontimer(start1.undo(), t=2000)
+start1.write("Escape the maze!", False, align="center", font=("Arial",60,"bold"))
+turtle.ontimer(start1.undo(), t=2000)
+playermovement()
+
+#Main loop
+while True:
+    
+    #Check for coin collision
+    for treasure in points:
+        if player.is_collision(treasure):
+            player.points += treasure.points
+            treasure.destroy()
+            points.remove(treasure)
+
+    #Check for heart collision
+    for heart in hearts:
+        if player.is_collision(heart):
+            player.lives += heart.lives
+            heart.destroy()
+            hearts.remove(heart)
+        
+    #Draw score on screen
+    mypen.undo()
+    mypen.color("white")
+    mypen.penup()
+    mypen.hideturtle()
+    mypen.setposition(0, 300)
+    scorestring = "Current score: %s" %player.points
+    mypen.write(scorestring, False, align="center", font=("Arial",14,"normal"))
+    
+    #Draw highscore
+    highscore = max(scores)
+    highscoretext.undo()
+    highscoretext.color("white")
+    highscoretext.penup()
+    highscoretext.hideturtle()
+    highscoretext.setposition(-288, 320)
+    highscorestring = "Highscore: %s" %highscore
+    highscoretext.write(highscorestring, False, align="left", font=("Arial",14,"normal"))
+
+    #Draw average score
+    length = len(scores)
+    if length == 1:
+        length = 2
+    averagescore = sum(scores) / (length - 1)
+    averagescoretext.undo()
+    averagescoretext.color("white")
+    averagescoretext.penup()
+    averagescoretext.hideturtle()
+    averagescoretext.setposition(-288, 300)
+    averagescorestring = "Average score: %s" %averagescore
+    averagescoretext.write(averagescorestring, False, align="left", font=("Arial",14,"normal"))
+
+    #Draw lives on screen
+    lives.undo()
+    lives.color("white")
+    lives.penup()
+    lives.hideturtle()
+    lives.setposition(216, 300)
+    livestring = "Lives: %s" %player.lives
+    lives.write(livestring, False, align="left", font=("Arial",14,"normal"))
+
+    #Check for enemy collision
+    for enemy in enemies:
+        if player.is_collision(enemy):
+            if counter == 0:
+                player.goto(0, 264)
+            if counter == 1:
+                player.goto(-264, 264)
+            if counter == 2:
+                player.goto(-264, 264)
+            if counter == 3:
+                player.goto(-264, 216)
+            player.lives -= 1
+            life_lost.color("red")
+            life_lost.penup()
+            life_lost.hideturtle()
+            life_lost.setposition(286, 300)
+            life_lost.write("-1", False, align="left", font=("Arial",14,"normal"))
+            turtle.ontimer(life_lost.undo(), t=300)
+            #Restarts level and points if dead
+            if player.lives == 0:
+                death()
+                #Reset level count
+                counter = 0
+                #Setup game area again
+                setup_maze(levels[1])
+                #Initiate enemy movement
+                for enemy in enemies:
+                    turtle.ontimer(enemy.move, t=250)
+    #Check for key collision
+    if player.is_collision(key):
+        #Destroy key, door, and clear doors list
+        key.destroy()
+        door.destroy()
+        doors.clear()
+    #Check if level is passed
+    if player.is_collision(checkpoint):
+        if counter == 0:
+            counter += 1
+            advance()
+            #Setup next level
+            setup_maze(levels[2])
+            #Make door and key invisible (because there are none in this level)
+            door.destroy()
+            key.destroy()
+            wn.update()
+            start1.color("white")
+            start1.penup()
+            start1.hideturtle()
+            start1.setposition(0, 0)
+            start1.write("Level 2", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            start1.write("Avoid the ghosts!", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            #Initiate enemy movement
+            for enemy in enemies:
+                turtle.ontimer(enemy.move, t=250)
+            continue
+        if counter == 1:
+            counter += 1
+            advance()
+            #Setup next level
+            setup_maze(levels[3])
+            #Make door and key visible
+            door.showturtle()
+            key.showturtle()
+            wn.update()
+            start1.color("white")
+            start1.penup()  
+            start1.hideturtle()
+            start1.setposition(0, 0)
+            start1.write("Level 3", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            start1.write("The ghosts are smarter...", False, align="center", font=("Arial",40,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            for enemy in enemies:
+                turtle.ontimer(enemy.move, t=250)
+            continue
+        if counter == 2:
+            counter += 1
+            advance()
+            #Setup next level
+            setup_maze(levels[4])
+            #Make door and key visible
+            door.showturtle()
+            key.showturtle()
+            wn.update()
+            start1.color("white")
+            start1.penup()  
+            start1.hideturtle()
+            start1.setposition(0, 0)
+            start1.write("Level 4", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            start1.write("Final level!", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            for enemy in enemies:
+                turtle.ontimer(enemy.move, t=250)
+            continue
+        if counter == 3:
+            start1.color("white")
+            start1.penup()  
+            start1.hideturtle()
+            start1.setposition(0, 0)
+            start1.write("VICTORY!", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=5000)
+            start1.write("Restarting...", False, align="center", font=("Arial",60,"bold"))
+            turtle.ontimer(start1.undo(), t=2000)
+            counter = 0
+            #Clearing gameboard
+            pen.clear()
+            walls.clear()
+            checkpoints.clear()
+            #Deleting enemies
+            for enemy in enemies:
+                enemy.destroy()
+            #Deleting treasures
+            for treasure in points:
+                treasure.destroy()
+            #Deleting key and door
+            key.destroy()
+            door.destroy()
+            #Deleting hearts
+            for heart in hearts:
+                heart.destroy()
+            #Clearing lists
+            enemies.clear()
+            points.clear()
+            checkpoints.clear()
+            hearts.clear()
+            doors.clear()
+            #Resetting lives and score
+            player.lives = 3
+            scores.append(player.points)
+            player.points = 0
+            #Return to first level
+            setup_maze(levels[1])
+        
+    #Update screen
+    wn.update()
+			</pre>
+  		</div>
+	</div>
+	<p style="padding-right: 210px">
+	In Grade 11 Computer Engineering, I was able to create a game in Python with 4 levels. The player would be placed in a maze setting, and his/her objective is to escape the maze. The player would have coins to collect and enemies to avoid. In Level 2, the enemies move in random directions. In Level 3, the enemies become smarter, and are able to follow the player once he/she comes close enough. In Level 4, the player must first collect a key before they are able to win the game. Throughout the game, the player's scores and lives are displayed at the top.
+	</p>
+	<div class="gamecaptions" style="float: left; padding: 5px"><img class="gameimages" src="../images/newgame/game1.png"><br>Level 1</div>
+	<div class="gamecaptions" style="float: left; padding: 5px"><img class="gameimages" src="../images/newgame/game2.png"><br>Level 2</div>
+	<div class="gamecaptions" style="float: left; padding: 5px"><img class="gameimages" src="../images/newgame/game3.png"><br>Level 3</div>
+	<div class="gamecaptions" style="float: left; padding: 5px"><img class="gameimages" src="../images/newgame/game4.png"><br>Level 4</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ 	<footer>
+		<p>Patrick Pineda</p>
+		<p>ICS3U0</p>
+		<p>595243@pdsb.net</p>
+		<p><a href="#body">Back to top</a></p>
+	</footer>	
+  </div>
+</div>
+
+</body>
+</html>

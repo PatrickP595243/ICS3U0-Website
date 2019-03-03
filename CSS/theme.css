@@ -1,0 +1,169 @@
+body {
+	background-color: #ededed;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: Arial;
+  color: black;
+  text-align: center;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: Arial;
+  color: black;
+}
+
+h3 {
+  font-size: 18px;
+  font-family: Arial;
+  color: black;
+}
+
+p {
+	font-family: Arial;
+}
+
+.icon {
+  text-align: center;
+  width: 100px;
+}
+
+.aligncenter {
+  text-align: center;
+}
+
+.mainimage {
+  padding: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.me {
+  width: 150px;
+  float: left;
+  padding-right: 10px;
+}
+
+.flex-container {
+  display: flex;
+  background-color: #ededed;
+  flex-direction: column;
+  border: 1px black solid;
+  width: 100px;
+}
+
+.flex-container > div {
+  background-color: #ededed;
+  font-size: 12px;
+}
+
+.navbar a {
+  float: left;
+  font-family: Arial;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 25%;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+ }
+
+.navbar {
+  overflow: auto;
+  background-color: #333;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 20%;
+  position: fixed;
+}
+
+.right {
+  width: 80%;
+  margin-left: 20%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media only screen and (max-width: 768px) {
+  .left {
+    width: 100%;
+  }
+  .right {
+    width: 100%;
+  }
+}
+
+#dialog-window {
+  height: 403px;
+  border: 1px black solid;
+  width: 203px;
+  padding: 1px;
+  background-color: white;
+  float: right;
+}
+
+#scrollable-content {
+  height: 400px;
+  overflow: auto;
+  width: 200px;
+  float: right;
+}
+
+.gameimages {
+  width: 200px;
+}
+
+.gamecaptions {
+  font-family: Arial;
+}
+
+#topleft {
+  width: 250px;
+  height: 100px;
+  border: 1px black solid;
+  margin: none;
+  }
+
+footer {
+  background-color: black;
+  height: 150px;
+}
+
+footer > p {
+  font-family: Arial;
+  color: white;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin: 5px;
+}

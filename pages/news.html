@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="../CSS/
+	theme.css">
+	<title>Patrick's Site</title>
+	<link rel="icon" href="../images/tlk.png">
+
+</head>
+
+<body>
+	
+<div class="row">
+  <div class="column left" style="background-color:#ededed;">
+    <canvas id="myCanvas" width="250" height="100" style="border:1px solid #000000;">
+			</canvas>
+			<script>
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.font = "20px Arial";
+			ctx.fillText("Patrick Pineda",5,25);
+			ctx.fillText("ICS3U0 Website",5,50);
+			</script>
+	<p></p>
+	<canvas id="myCanvas2" width="250" height="500" style="border:1px solid #000000;">
+			</canvas>
+			<script>
+			var c = document.getElementById("myCanvas2");
+			var ctx = c.getContext("2d");
+			ctx.font = "20px Arial";
+			ctx.fillText("Announcements",5,25);
+			ctx.font = "16px Arial";
+			ctx.fillText("Tables assignment",5,50);
+			ctx.fillText("Website due Friday, March 1",5,75);
+			</script>
+  </div>
+  <div class="column right" style="background-color:#ededed;"">
+    <div class="navbar">
+	  	<a class="active" href="../index.html">Home</a>
+		<a href="assignments.html">Assignments</a>
+		<a href="contact.html">Contact</a>
+		<a href="about.html">About</a>
+  	</div>
+  </div>
+</div>
+
+
+</body>
+</html>
