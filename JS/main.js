@@ -107,7 +107,6 @@ function loop4(){
 	var attributes = []
 	var text = ""
 	var i = prompt("How many rows?")
-	i++
 	var x = prompt("Enter a character:")
 	for (y = 0; y < i; y++) {
 		for (z = -1; z < y; z++) {
@@ -115,9 +114,111 @@ function loop4(){
 		}
 		pattern.push(attributes)
 		attributes = []
+		if (y == (i-1)) {
+		text += pattern[y].join(" ")		
+		}
+		else {
 		text += pattern[y].join(" ") + "<br>"
+		}
 	}
 	document.getElementById("pattern2").innerHTML = text
 	console.log(pattern)
 
 }
+
+function loop5(){
+
+	var pattern = []
+	var attributes = []
+	var text = ""
+	var i = prompt("How many rows?")
+	var x = prompt("Enter a character:")
+	for (y = 0; y < i; y++) {
+		for (z = -1; z < y; z++) {
+			attributes.push(x)
+		}
+		pattern.push(attributes)
+		attributes = []
+		if (y == (i-1)) {
+		text += pattern[y].join(" ")		
+		}
+		else {
+		text += pattern[y].join(" ") + "<br>"
+		}
+	}
+	document.getElementById("pattern3").innerHTML = text
+	console.log(pattern)
+
+}
+
+function loop6(){
+
+	var pattern = []
+	var attributes = []
+	var text = ""
+	var i = prompt("How many rows?")
+	var check = 0
+	var x = prompt("Enter a character:")
+	for (y = 0; y < i; y++) {
+		for (z = -1; z < y; z++) {
+			if (check == 0) {
+				for (a = i - y; a > 1; a--) {
+					attributes.push("\xa0")
+				}
+			}
+			check = 1
+			attributes.push(x)
+		}
+		check = 0
+		pattern.push(attributes)
+		attributes = []
+		if (y == (i-1)) {
+			text += pattern[y].join(" ")		
+		}
+		else {
+			text += pattern[y].join(" ") + "<br>"
+		}
+	}
+	document.getElementById("pattern4").innerHTML = text
+	console.log(pattern)
+
+}
+
+function guessNumber(){
+
+	var max = prompt("Pick a number:")
+	var ans = Math.floor(Math.random() * max)
+	console.log(ans)
+	var guess = prompt("Guess the number:")
+	var number = 1
+	while (guess !== ans) {
+		if (guess > ans) {
+			var guess = prompt("The number is lower:")
+			number += 1
+		}
+		if (guess < ans) {
+			var guess = prompt("The number is higher:")
+			number += 1
+		}
+		if (guess == ans) {
+			alert("YAY")
+			console.log(number)
+			break
+		}
+	}
+
+}
+
+function test(){
+	for (i=2; i < 101; i += 2){
+    	console.log(i)
+    }
+}
+
+function test2(){
+	var ans
+    while (ans !== "yes"){
+    	var ans = prompt("Is it the weekend yet?");
+    }
+}
+

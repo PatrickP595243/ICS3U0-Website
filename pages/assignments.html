@@ -24,7 +24,7 @@
 			ctx.fillText("ICS3U0 Portfolio",5,50);
 			</script>
 	<p></p>
-	<canvas id="myCanvas2" width="250" height="534" style="border:1px solid #000000;">
+	<canvas id="myCanvas2" width="250" height="400" style="border:1px solid #000000;">
 			</canvas>
 			<script>
 			var c = document.getElementById("myCanvas2");
@@ -34,6 +34,11 @@
 			ctx.font = "16px Arial";
 			ctx.fillText("Website due Friday, March 1",5,50);
 			</script>
+		<h3>Add an announcement:</h3>
+		<form>
+  			<textarea class="message" type="text" id="announcement"></textarea><br/>
+  		</form>
+  		 <input type="submit" onclick="">
   </div>
   <div class="column right" style="background-color:#ededed;"">
     <div class="navbar">
@@ -43,16 +48,27 @@
 		<a href="about.html">About</a>
   	</div>
   	<h2>Assignments</h2>
-  	<div>
-	  	<h3>Assignment 2</h3>
-	  	<button onclick="loop2()">Click here!</button>
-	  	<p id="pattern"></p>
-	  	<button onclick="loop3()">Click here!</button>
-	  	<p id="pattern2"></p>
+	<div id="rectangle" class="aligncenter">
+	  	<button onclick="loop2()">Pattern!</button>
 	</div>
-  	<div id="rectangle" class="aligncenter">
-  		<p>Assignment 1</p>
-  	</div>
+	<p id="pattern"></p>
+	<div id="rectangle" class="aligncenter">
+	  	<button onclick="loop4()">Pattern Vol 2</button>
+	</div>
+	  	<p id="pattern2"></p>		
+	<div id="rectangle" class="aligncenter">
+	  	<button onclick="loop5()">Pattern Vol 3</button>
+	</div>
+	<div style="text-align: left">
+	  	<p id="pattern3" style="text-align: right; display: inline-block;"></p>
+	</div>
+	<div id="rectangle" class="aligncenter">
+	  	<button onclick="loop6()">Pattern Vol 6</button>
+	</div>
+	<p id="pattern4"></p>
+	<div id="rectangle" class="aligncenter">
+		<button onclick="guessNumber()">Guess the Number!</button>
+	</div>
   	<div id="rectangle" class="aligncenter">
   		<p>Assignment 3</p>
   	</div>
