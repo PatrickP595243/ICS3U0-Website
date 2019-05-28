@@ -1,3 +1,16 @@
+var c = document.getElementById("myCanvas7")
+var ctx = c.getContext("2d");
+ctx.font = "20px Arial";
+ctx.fillText("Patrick Pineda",5,25);
+ctx.fillText("ICS3U0 Portfolio",5,50);
+
+var c = document.getElementById("myCanvas8");
+var ctx = c.getContext("2d");
+ctx.font = "20px Arial";
+ctx.fillText("Announcements",5,25);
+ctx.font = "16px Arial";
+ctx.fillText("Website due Friday, March 1",5,50);
+
 function welcome_user(){
 
 	var username = prompt("Enter your name:");
@@ -148,6 +161,7 @@ function loop5(){
 	}
 	document.getElementById("pattern3").innerHTML = text
 	console.log(pattern)
+	console.log(text)
 
 }
 
@@ -222,3 +236,205 @@ function test2(){
     }
 }
 
+function test6(){
+	var faveThings = ["1", "2", "3", "4", "5", "6"]
+	var x = faveThings.length
+	for (i = 0; i < x; i++){
+		console.log(faveThings[i])
+	}
+}
+
+function quiz(){
+	array = [67, 65, 67, 65]
+	sum = 0
+	for (i = 0; i < array.length; i++){
+		console.log("The mark is " + array[i])
+		sum += array[i]
+	}
+	avg = sum / array.length
+	console.log("The average is " + avg)
+}
+
+function quiz2(){
+	temps = [86, 77, 68, 86, 95]
+	console.log("Temperature:")
+	for (i = 0; i < temps.length; i++){
+		temp = temps[i] - 32
+		temp = temp * 5 / 9
+		console.log(i + 1 + ". " + temp + " degrees Celcius")
+	}
+}
+
+function string(){
+	x = prompt("Enter any word:")
+	alert(x.length)
+}
+
+function string2(){
+	x = prompt("Enter any word:")
+	var y = ""
+	for (i = 0; i < x.length; i++){
+		z = x.charAt(i)
+		if (i % 2 == 0){
+			a = z.toUpperCase()
+			y += a
+		}
+		else {
+			a = z.toLowerCase()
+			y += a
+		}	
+	}
+	alert(y)
+}
+
+function string3(userName, password){
+	userName = userName.toUpperCase()
+	password = password.toUpperCase()
+	x = "PATRICK"
+	y = "PASSWORD"
+	if (userName == x && password == y) {
+		console.log("True")
+	}
+	else {
+		console.log("False")
+	}
+}
+
+string3("Patrick", "Passwor")
+
+function pigLati(){
+	str = "Hello"
+	var arr = str.split("")
+	console.log(arr)
+	arr[0] = arr[0].toLowerCase()
+	arr.push(arr[0])
+	arr.shift()
+	arr.push("a", "y")
+	arr[0] = arr[0].toUpperCase()
+	console.log(arr)
+}
+
+function pigLatin1(){
+	str = prompt("Enter a string:")
+	newStr = ""
+	var arr = str.split(" ")
+	console.log(arr)
+	for (i=0; i<arr.length; i++){
+		word = arr[i].split("")
+		if (word.length > 2){
+			word[0] = word[0].toLowerCase()
+			word.push(word[0])
+			word.shift()
+			word.push("a","y")
+			if (i == 0){
+				word[0] = word[0].toUpperCase()
+			}
+			console.log(word)
+		}
+		newStr += word.join("") + " "
+	}
+	alert(newStr)
+}
+
+function encryption(){
+	str = prompt("Enter a string:")
+	newStr = ""
+	var arr = str.split(" ")
+	for (y=0; y<arr.length; y++){
+		word = arr[y].split("")
+		for (i=0; i<word.length; i++){
+			if (word[i] == "a"){
+				newStr += "z"
+			}
+			if (word[i] == "b"){
+				newStr += "y"
+			}
+			if (word[i] == "c"){
+				newStr += "x"
+			}
+			if (word[i] == "d"){
+				newStr += "w"
+			}
+			if (word[i] == "e"){
+				newStr += "v"
+			}
+			if (word[i] == "f"){
+				newStr += "u"
+			}
+			if (word[i] == "g"){
+				newStr += "t"
+			}
+			if (word[i] == "h"){
+				newStr += ("s")
+			}
+			if (word[i] == "i"){
+				newStr += ("r")
+			}
+			if (word[i] == "j"){
+				newStr += ("q")
+			}
+			if (word[i] == "k"){
+				newStr += ("p")
+			}
+			if (word[i] == "l"){
+				newStr += ("o")
+			}
+			if (word[i] == "m"){
+				newStr += ("n")
+			}
+			if (word[i] == "n"){
+				newStr += "m"
+			}
+			if (word[i] == "o"){
+				newStr += "l"
+			}
+			if (word[i] == "p"){
+				newStr += "k"
+			}
+			if (word[i] == "q"){
+				newStr += "j"
+			}
+			if (word[i] == "r"){
+				newStr += "i"
+			}
+			if (word[i] == "s"){
+				newStr += "h"
+			}
+			if (word[i] == "t"){
+				newStr += "g"
+			}
+			if (word[i] == "u"){
+				newStr += "f"
+			}
+			if (word[i] == "v"){
+				newStr += "e"
+			}
+			if (word[i] == "w"){
+				newStr += "d"
+			}
+			if (word[i] == "x"){
+				newStr += "c"
+			}
+			if (word[i] == "y"){
+				newStr += "b"
+			}
+			if (word[i] == "z"){
+				newStr += "a"
+			}
+			if (word[i] == " "){
+				newStr += " "
+			}
+			if (word[i] == "!"){
+				newStr += "!"
+			}
+			if (word[i] == "."){
+				newStr += "."
+			}
+			if (word[i] == "?"){
+				newStr += "?"
+			}
+		}
+		newStr += " "
+	}
+	console.log(newStr)
+}
