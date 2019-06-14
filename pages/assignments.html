@@ -19,10 +19,8 @@
 	<canvas id="myCanvas8" width="250" height="400" style="border:1px solid #000000;">
 			</canvas>
 		<h3>Add an announcement:</h3>
-		<form>
-  			<textarea class="message" type="text" id="announcement"></textarea><br/>
-  		</form>
-  		 <input type="submit" onclick="">
+		<input id="announcement">
+		<button type="button" onclick="announcements()">Submit</button>
   </div>
   <div class="column right" style="background-color:#ededed;"">
     <div class="navbar">
@@ -71,6 +69,11 @@
   	<div id="rectangle" class="aligncenter">
   		<button onclick="encryption()">Decryption</button>
   	</div>
+  	<div>
+	 	<svg width="500" height="500" fill="#ffeecc">
+	    	<rect width="500" height="500" style="fill:#ffeecc"/>
+	    	<rect width="225" height="200" x="145" y="150" rx="50" ry="50" style="fill:#ffbf80">
+		</svg> 
  	<footer>
 		<p>Patrick Pineda</p>
 		<p>ICS3U0</p>

@@ -9,7 +9,15 @@ var ctx = c.getContext("2d");
 ctx.font = "20px Arial";
 ctx.fillText("Announcements",5,25);
 ctx.font = "16px Arial";
-ctx.fillText("Website due Friday, March 1",5,50);
+
+counter = 1
+
+function announcements(){
+	var x = document.getElementById("announcement").value
+	console.log(x)
+	counter += 1
+	ctx.fillText(x,5,(25 * counter));
+}
 
 function welcome_user(){
 
@@ -55,10 +63,6 @@ function practice3() {
 
 function practice4(){
 	console.log("Patrick");
-}
-
-function Announcement() {
-  var userInput = document.getElementById("announcement").value;
 }
 
 function loop1(){

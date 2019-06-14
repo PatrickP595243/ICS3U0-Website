@@ -12,14 +12,13 @@
 
 <div class="row" id="body">
   <div class="column left" style="background-color:#ededed;">
-    <canvas id="myCanvas1" class="Yar" width="250" height="100" style="border:1px solid #000000;"></canvas>
+    <canvas id="myCanvas1" width="250" height="100" style="border:1px solid #000000;"></canvas>
 	<p></p>
 	<canvas id="myCanvas2" width="250" height="400" style="border:1px solid #000000;"></canvas>
 		<h3>Add an announcement:</h3>
-		<form>
-  			<textarea class="message" type="text" id="announcement"></textarea><br/>
-  		</form>
-  		 <input type="submit" onclick="">
+		<input id="announcement">
+		<button type="button" onclick="announcements()">Submit</button>
+		<button onclick="clear()">Clear</button>
   </div>
   <div class="column right" style="background-color:#ededed;">
     <div class="navbar">
